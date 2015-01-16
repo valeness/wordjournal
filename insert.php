@@ -1,25 +1,57 @@
-<?php
+<!DOCTYPE html>
+<HTML>
+<head>
+    <?php include_once '../../includes/views/head.php'; ?>
+</head>
 
-    require_once '../../includes/connect.php';
+<body>
 
-    $word = $_POST['word'];
-    $definition = $_POST['definition'];
+    <?php include_once 'includes/header.php'; ?>
 
-    $sql = "INSERT INTO words (word, definition) VALUES (?, ?)";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(1, $word);
-    $stmt->bindParam(2, $definition);
+    <div class="row">
+        <div class="small-8 small-offset-2 columns">
+            <table class="small-12">
+                <thead>
+                <tr>
+                    <th>
+                        Word
+                    </th>
+                    <th>
+                        Definition
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php
 
-    if($stmt->execute())
-    {
-        echo "
-        Word: $word
-        <br />
-        Definition: $definition
-        <br />
-        <a href='list.php'>View All Words</a>
-        ";
-    }
-    else {
-        echo "Failed to insert!";
-    }
+                    require_once '../../includes/connect.php';
+
+                    $word = $_POST['word'];
+                    $definition = $_POST['definition'];
+
+                    $sql = "INSERT INTO words (word, definition) VALUES (?, ?)";
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindParam(1, $word);
+                    $stmt->bindParam(2, $definition);
+
+                    if($stmt->execute())
+                    {
+                        echo "
+                            <tr>
+                            <td>$word</td>
+                            <td>$definition</td>
+                            </tr>
+                            ";
+                    }
+                    else {
+                        echo "Failed to insert!";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <a href='list.php' class="button expand">View All Words</a>
+        </div>
+    </div>
+</body>
+</HTML>

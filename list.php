@@ -1,14 +1,21 @@
-<?php
+<!DOCTYPE html>
+<HTML>
+<head>
+    <?php
+    include_once '../../includes/views/head.php';
+    require_once '../../includes/connect.php';
+    ?>
 
-require_once '../../includes/connect.php';
+</head>
 
-$sql = "SELECT * FROM words";
-$stmt = $db->prepare($sql);
-$stmt->execute();
+<body>
 
-$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+<?php include_once 'includes/header.php'; ?>
 
-echo "<table border='1'>
+<div class="row">
+    <div class="small-8 small-offset-2 columns">
+        <table class="small-12">
+            <thead>
             <tr>
                 <th>
                     Word
@@ -16,24 +23,12 @@ echo "<table border='1'>
                 <th>
                     Definition
                 </th>
-            </tr>";
-
-foreach($data as $row)
-{
-    $word = $row['word'];
-    $definition = $row['definition'];
-
-    echo "
-        <tr>
-            <td>
-                $word
-            </td>
-            <td>
-                $definition
-            </td>
-        </tr>
-    ";
-}
-
-echo "</table>";
+            </tr>
+            </thead>
+            <tbody>
+            <?php include_once 'includes/list.inc.php'; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
