@@ -10,6 +10,12 @@
 
     <div class="row">
         <div class="small-8 small-offset-2 columns">
+            <?php
+                $error = $_GET['error'];
+                if($error == 1){
+                    echo "<h3 class='text-center'>That word already exists!</h3>";
+                }
+            ?>
             <form method="post" action="insert.php">
                 <label>
                     Word:

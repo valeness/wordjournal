@@ -29,22 +29,36 @@
                     $word = $_POST['word'];
                     $definition = $_POST['definition'];
 
-                    $sql = "INSERT INTO words (word, definition) VALUES (?, ?)";
+                    $sql = "SELECT word FROM words WHERE word = ? LIMIT 1";
                     $stmt = $db->prepare($sql);
                     $stmt->bindParam(1, $word);
-                    $stmt->bindParam(2, $definition);
+                    $stmt->execute();
 
-                    if($stmt->execute())
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    if($data[0])
                     {
-                        echo "
+                        // Word Exists
+                        header("Location: index.php?error=1");
+                    }
+                    else
+                    {
+                        $sql = "INSERT INTO words (word, definition) VALUES (?, ?)";
+                        $stmt = $db->prepare($sql);
+                        $stmt->bindParam(1, $word);
+                        $stmt->bindParam(2, $definition);
+
+                        if($stmt->execute())
+                        {
+                            echo "
                             <tr>
                             <td>$word</td>
                             <td>$definition</td>
                             </tr>
                             ";
-                    }
-                    else {
-                        echo "Failed to insert!";
+                        }
+                        else {
+                            echo "Failed to insert!";
+                        }
                     }
                     ?>
                 </tbody>
