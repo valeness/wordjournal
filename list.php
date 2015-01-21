@@ -14,6 +14,7 @@
 
 <div class="row">
     <div class="small-8 small-offset-2 columns">
+        <?php include_once 'includes/nav.php'; ?>
         <table class="small-12">
             <thead>
             <tr>

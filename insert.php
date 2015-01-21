@@ -64,7 +64,7 @@
                 </tbody>
             </table>
 
-            <a href='list.php' class="button expand">View All Words</a>
+            <?php include_once 'includes/nav.php'; ?>
         </div>
     </div>
 </body>
